@@ -36,7 +36,8 @@ fi
 indent "Version $VERSION"
 
 topic "Downloading chromedriver v$VERSION"
-ZIP_URL="https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/$VERSION/linux64/chromedriver-linux64.zip"
+# ZIP_URL="https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/$VERSION/linux64/chromedriver-linux64.zip"
+ZIP_URL="https://we-misce.s3.amazonaws.com/rpms/heroku-chromedriver-linux64-115.0.5763.0.zip"
 ZIP_LOCATION="/tmp/chromedriver.zip"
 curl --silent --show-error --fail --retry 3 --retry-connrefused --connect-timeout 10 -o "${ZIP_LOCATION}" "${ZIP_URL}"
 unzip -j -o $ZIP_LOCATION -d $BIN_DIR
