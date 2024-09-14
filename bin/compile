@@ -25,18 +25,6 @@ ENV_DIR=${3:-}
 BIN_DIR=$BUILD_DIR/.chromedriver/bin
 mkdir -p $BIN_DIR
 
-if [ -f $ENV_DIR/CHROMEDRIVER_VERSION ]; then
-  VERSION=$(cat $ENV_DIR/CHROMEDRIVER_VERSION)
-  topic "Using chromedriver v${VERSION} (set by the env var 'CHROMEDRIVER_VERSION')"
-else
-  topic "Looking up latest chromedriver version"
-  LATEST="https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions.json"
-  VERSION=$(curl --silent --show-error --fail --retry 3 --retry-connrefused --connect-timeout 10 "${LATEST}" | jq -r '.channels.Stable.version')
-fi
-indent "Version $VERSION"
-
-topic "Downloading chromedriver v$VERSION"
-# ZIP_URL="https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/$VERSION/linux64/chromedriver-linux64.zip"
 ZIP_URL="https://we-misce.s3.amazonaws.com/rpms/heroku-chromedriver-linux64-115.0.5763.0.zip"
 ZIP_LOCATION="/tmp/chromedriver.zip"
 curl --silent --show-error --fail --retry 3 --retry-connrefused --connect-timeout 10 -o "${ZIP_LOCATION}" "${ZIP_URL}"
